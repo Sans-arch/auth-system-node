@@ -1,4 +1,8 @@
 # API de autenticação e cadastro de usuários
 
-[] - Permitir a criação de um usuário
-[] - Permitir o GET de um usuário
+- [ ] - Permitir a criação de um usuário
+- [ ] - Permitir o GET de um usuário
+
+Conceitos utilizados no projeto:
+
+- Criação de API Rest usando Express
