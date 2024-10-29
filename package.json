@@ -4,13 +4,14 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon src/infra/http/server.ts"
   },
-  "author": "",
+  "author": "Sans-arch",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "uuid": "^11.0.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
