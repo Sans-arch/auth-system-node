@@ -6,3 +6,4 @@ tmp/
 temp/
 .devdbrc
 database.sqlite
+coverage/

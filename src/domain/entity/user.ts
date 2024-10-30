@@ -55,12 +55,22 @@ export default class User {
   }
 
   private validate() {
-    if (!this._name || this._name.length < 3) {
-      throw new Error("User name is required");
+    const uuidRegex = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
+
+    if (!uuidRegex.test(this.id)) {
+      throw new Error("ID is invalid");
     }
 
-    if (!this._email || !this._email.includes("@")) {
-      throw new Error("User email is required");
+    if (!this._name) {
+      throw new Error("Name is required");
+    }
+
+    if (!this._email) {
+      throw new Error("Email is required");
+    }
+
+    if (!this._email.includes("@")) {
+      throw new Error("Email is required");
     }
   }
 }

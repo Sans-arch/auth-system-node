@@ -6,6 +6,7 @@
       "build": "tsc",
       "dev": "nodemon src/infra/http/server.ts",
       "test": "jest",
+      "coverage": "jest --coverage",
       "test-db": "ts-node src/infra/database/test-db.ts",
       "typeorm": "typeorm-ts-node-commonjs"
    },

@@ -7,6 +7,7 @@
 - [x] - Utilizar um ORM -> TypeORM
 - [ ] - Utilizar migrations
 - [x] - Criar testes unitários com Jest
+- [x] - Rodar cobertura de código (coverage)
 
 Conceitos utilizados no projeto:
 
@@ -15,3 +16,4 @@ Conceitos utilizados no projeto:
 - Utilização de banco de dados usando SQLite
 - Utilização de ORM (usando TypeORM)
 - Criação de testes unitários com Jest
+- Utilização de code coverage com o Jest
