@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import User from "../../../domain/entity/user";
 import { UserInputDTO, UserOutputDTO } from "../dtos/user.dto.interface";
+import { UserRepository } from "../../database/repositories/user.repository";
 
 const users: User[] = [];
 
@@ -12,14 +13,17 @@ export const createUser = async (req: Request, res: Response<UserOutputDTO>) => 
     email,
   });
 
+  const userRepository = new UserRepository();
+  const persistedUser = await userRepository.create(createdUser);
+
   users.push(createdUser);
 
   res.status(201).json({
-    id: createdUser.id,
-    name: createdUser.name,
-    email: createdUser.email,
-    createdAt: createdUser.created_at,
-    updatedAt: createdUser.updated_at,
+    id: persistedUser.id,
+    name: persistedUser.name,
+    email: persistedUser.email,
+    createdAt: persistedUser.created_at,
+    updatedAt: persistedUser.updated_at,
   });
 };
 
