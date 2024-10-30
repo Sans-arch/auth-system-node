@@ -11,6 +11,7 @@ export class UserRepository implements UserRepositoryInterface {
       id: user.id,
       name: user.name,
       email: user.email,
+      password: user.password,
       created_at: user.created_at,
       updated_at: user.updated_at,
     });
@@ -19,6 +20,7 @@ export class UserRepository implements UserRepositoryInterface {
       id: persistedUser.id,
       email: persistedUser.email,
       name: persistedUser.name,
+      password: persistedUser.password,
       created_at: persistedUser.created_at,
       updated_at: persistedUser.updated_at,
     });
@@ -39,8 +41,17 @@ export class UserRepository implements UserRepositoryInterface {
       id: userModel.id,
       email: userModel.email,
       name: userModel.name,
+      password: userModel.password,
       created_at: userModel.created_at,
       updated_at: userModel.updated_at,
+    });
+  }
+
+  async existsByEmail(email: string): Promise<boolean> {
+    const userModelRepository = ApplicationDatabaseSource.getRepository(UserModel);
+
+    return await userModelRepository.existsBy({
+      email: email,
     });
   }
 
@@ -59,6 +70,7 @@ export class UserRepository implements UserRepositoryInterface {
       id: updatedPersistedUser.id,
       email: updatedPersistedUser.email,
       name: updatedPersistedUser.name,
+      password: updatedPersistedUser.password,
       created_at: updatedPersistedUser.created_at,
       updated_at: updatedPersistedUser.updated_at,
     });
@@ -72,8 +84,6 @@ export class UserRepository implements UserRepositoryInterface {
     if (!userToDelete) {
       throw new Error(`User with id ${id} not found`);
     }
-
-    console.log({ userToDelete });
 
     await userModelRepository.remove(userToDelete);
   }

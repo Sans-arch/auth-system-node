@@ -5,6 +5,7 @@ describe("User unit test suite", () => {
     const input = {
       name: "John",
       email: "john@email.com",
+      password: "123",
     };
 
     const user = new User(input);
@@ -13,6 +14,7 @@ describe("User unit test suite", () => {
     expect(user.id).toBeDefined();
     expect(user.name).toBe(input.name);
     expect(user.email).toBe(input.email);
+    expect(user.password).toBeDefined();
     expect(user.created_at).toBeDefined();
     expect(user.updated_at).toBeDefined();
   });
@@ -22,6 +24,7 @@ describe("User unit test suite", () => {
       id: "fad0342d-1623-49c1-a7ee-91f94983ceaf",
       name: "John",
       email: "john@email.com",
+      password: "123",
     };
 
     const user = new User(input);
@@ -30,6 +33,7 @@ describe("User unit test suite", () => {
     expect(user.id).toBe(input.id);
     expect(user.name).toBe(input.name);
     expect(user.email).toBe(input.email);
+    expect(user.password).toBeDefined();
     expect(user.created_at).toBeDefined();
     expect(user.updated_at).toBeDefined();
   });
@@ -39,6 +43,7 @@ describe("User unit test suite", () => {
       id: "fad0342d-1623",
       name: "John",
       email: "john@email.com",
+      password: "123",
     };
 
     expect(() => {
@@ -50,6 +55,7 @@ describe("User unit test suite", () => {
     const input = {
       name: "",
       email: "",
+      password: "123",
     };
 
     expect(() => {
@@ -61,6 +67,7 @@ describe("User unit test suite", () => {
     const input = {
       name: "John",
       email: "",
+      password: "123",
     };
 
     expect(() => {
@@ -72,6 +79,7 @@ describe("User unit test suite", () => {
     const input = {
       name: "John",
       email: "email",
+      password: "123",
     };
 
     expect(() => {
@@ -79,10 +87,23 @@ describe("User unit test suite", () => {
     }).toThrow("Email is required");
   });
 
+  it("should throw error when password is empty string", () => {
+    const input = {
+      name: "John",
+      email: "email@email.com",
+      password: "",
+    };
+
+    expect(() => {
+      new User(input);
+    }).toThrow("Password is required");
+  });
+
   it("should change name", () => {
     const input = {
       name: "John",
       email: "john@email.com",
+      password: "123",
     };
 
     const user = new User(input);
@@ -99,6 +120,7 @@ describe("User unit test suite", () => {
     const input = {
       name: "John",
       email: "john@email.com",
+      password: "123",
     };
 
     const user = new User(input);
@@ -115,6 +137,7 @@ describe("User unit test suite", () => {
     const input = {
       name: "John",
       email: "john@email.com",
+      password: "123",
     };
 
     const user = new User(input);

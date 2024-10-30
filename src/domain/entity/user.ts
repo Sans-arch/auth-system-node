@@ -4,6 +4,7 @@ interface UserProps {
   id?: string;
   name: string;
   email: string;
+  password: string;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -12,6 +13,7 @@ export default class User {
   private _id: string;
   private _name: string;
   private _email: string;
+  private _password: string;
   private _created_at: Date;
   private _updated_at: Date;
 
@@ -19,6 +21,7 @@ export default class User {
     this._id = props.id || uuid();
     this._name = props.name;
     this._email = props.email;
+    this._password = props.password;
     this._created_at = props.created_at || new Date();
     this._updated_at = props.updated_at || new Date();
     this.validate();
@@ -42,6 +45,10 @@ export default class User {
 
   get updated_at() {
     return this._updated_at;
+  }
+
+  get password() {
+    return this._password;
   }
 
   changeName(name: string): void {
@@ -71,6 +78,10 @@ export default class User {
 
     if (!this._email.includes("@")) {
       throw new Error("Email is required");
+    }
+
+    if (!this._password || this._password.length === 0) {
+      throw new Error("Password is required");
     }
   }
 }
