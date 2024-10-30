@@ -63,4 +63,18 @@ export class UserRepository implements RepositoryInterface<User> {
       updated_at: updatedPersistedUser.updated_at,
     });
   }
+
+  async delete(id: string): Promise<void> {
+    const userModelRepository = ApplicationDatabaseSource.getRepository(UserModel);
+
+    const userToDelete: UserModel = await userModelRepository.findOneBy({ id });
+
+    if (!userToDelete) {
+      throw new Error(`User with id ${id} not found`);
+    }
+
+    console.log({ userToDelete });
+
+    await userModelRepository.remove(userToDelete);
+  }
 }

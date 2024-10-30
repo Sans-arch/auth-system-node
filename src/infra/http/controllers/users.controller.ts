@@ -69,3 +69,16 @@ export const updateUser = async (req: Request, res: Response<UserOutputDTO | { m
     updatedAt: updatedUser.updated_at,
   });
 };
+
+export const deleteUser = async (req: Request, res: Response<{ message: string }>) => {
+  const { id } = req.params;
+
+  const userRepository = new UserRepository();
+
+  try {
+    await userRepository.delete(id);
+    res.status(204).send();
+  } catch (e) {
+    res.status(404).json({ message: "User not found" });
+  }
+};
