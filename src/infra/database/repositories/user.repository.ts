@@ -1,9 +1,9 @@
 import User from "../../../domain/entity/user";
-import { RepositoryInterface } from "../../../domain/repository/repository.interface";
+import { UserRepositoryInterface } from "../../../domain/repository/user.repository.interface";
 import { ApplicationDatabaseSource } from "../data-source";
 import { UserModel } from "../models/user.model";
 
-export class UserRepository implements RepositoryInterface<User> {
+export class UserRepository implements UserRepositoryInterface {
   async create(user: User): Promise<User> {
     const userModelRepository = ApplicationDatabaseSource.getRepository(UserModel);
 
