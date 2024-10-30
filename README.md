@@ -2,6 +2,7 @@
 
 - [x] - Permitir a criação de um usuário
 - [x] - Permitir o GET de um usuário
+- [x] - Permitir atualização de um usuário
 - [x] - Utilizar um ORM -> TypeORM
 - [ ] - Utilizar migrations
 

@@ -43,4 +43,24 @@ export class UserRepository implements RepositoryInterface<User> {
       updated_at: userModel.updated_at,
     });
   }
+
+  async update(existingUser: User): Promise<User> {
+    const userModelRepository = ApplicationDatabaseSource.getRepository(UserModel);
+
+    const updatedPersistedUser: UserModel = await userModelRepository.save({
+      id: existingUser.id,
+      name: existingUser.name,
+      email: existingUser.email,
+      created_at: existingUser.created_at,
+      updated_at: existingUser.updated_at,
+    });
+
+    return new User({
+      id: updatedPersistedUser.id,
+      email: updatedPersistedUser.email,
+      name: updatedPersistedUser.name,
+      created_at: updatedPersistedUser.created_at,
+      updated_at: updatedPersistedUser.updated_at,
+    });
+  }
 }

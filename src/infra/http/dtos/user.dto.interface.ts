@@ -1,4 +1,4 @@
-export interface UserInputDTO {
+export interface UserCreateInputDTO {
   name: string;
   email: string;
 }
@@ -9,4 +9,9 @@ export interface UserOutputDTO {
   email: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface UserUpdateInputDTO {
+  name: string;
+  email: string;
 }

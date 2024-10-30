@@ -21,6 +21,7 @@ export default class User {
     this._email = props.email;
     this._created_at = props.created_at || new Date();
     this._updated_at = props.updated_at || new Date();
+    this.validate();
   }
 
   get id() {
@@ -41,5 +42,25 @@ export default class User {
 
   get updated_at() {
     return this._updated_at;
+  }
+
+  changeName(name: string): void {
+    this._name = name;
+    this.validate();
+  }
+
+  changeEmail(email: string): void {
+    this._email = email;
+    this.validate();
+  }
+
+  private validate() {
+    if (!this._name || this._name.length < 3) {
+      throw new Error("User name is required");
+    }
+
+    if (!this._email || !this._email.includes("@")) {
+      throw new Error("User email is required");
+    }
   }
 }
