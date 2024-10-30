@@ -25,6 +25,22 @@ export class UserRepository implements RepositoryInterface<User> {
   }
 
   async findById(id: string): Promise<User> {
-    throw new Error("Method not implemented.");
+    const userModelRepository = ApplicationDatabaseSource.getRepository(UserModel);
+
+    const userModel = await userModelRepository.findOneBy({
+      id: id,
+    });
+
+    if (!userModel) {
+      return null;
+    }
+
+    return new User({
+      id: userModel.id,
+      email: userModel.email,
+      name: userModel.name,
+      created_at: userModel.created_at,
+      updated_at: userModel.updated_at,
+    });
   }
 }

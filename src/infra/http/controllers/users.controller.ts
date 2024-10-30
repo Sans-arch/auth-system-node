@@ -3,8 +3,6 @@ import User from "../../../domain/entity/user";
 import { UserInputDTO, UserOutputDTO } from "../dtos/user.dto.interface";
 import { UserRepository } from "../../database/repositories/user.repository";
 
-const users: User[] = [];
-
 export const createUser = async (req: Request, res: Response<UserOutputDTO>) => {
   const { name, email } = req.body as UserInputDTO;
 
@@ -15,8 +13,6 @@ export const createUser = async (req: Request, res: Response<UserOutputDTO>) => 
 
   const userRepository = new UserRepository();
   const persistedUser = await userRepository.create(createdUser);
-
-  users.push(createdUser);
 
   res.status(201).json({
     id: persistedUser.id,
@@ -30,7 +26,8 @@ export const createUser = async (req: Request, res: Response<UserOutputDTO>) => 
 export const getUser = async (req: Request, res: Response<UserOutputDTO | { message: string }>) => {
   const { id } = req.params;
 
-  const user = users.find((user) => user.id === id);
+  const userRepository = new UserRepository();
+  const user = await userRepository.findById(id);
 
   if (!user) {
     res.status(404).json({ message: "User not found" });
