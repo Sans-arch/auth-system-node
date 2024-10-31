@@ -8,6 +8,7 @@
 - [ ] - Utilizar migrations
 - [x] - Criar testes unitários com Jest
 - [x] - Rodar cobertura de código (coverage)
+- [x] - Utilizar Docker (adicionar Dockerfile)
 
 Conceitos utilizados no projeto:
 

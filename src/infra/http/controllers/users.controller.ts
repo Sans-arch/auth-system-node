@@ -1,10 +1,26 @@
 import { Request, Response } from "express";
+import bcrypt from "bcrypt";
 import User from "../../../domain/entity/user";
 import { UserCreateInputDTO, UserOutputDTO, UserUpdateInputDTO } from "../dtos/user.dto.interface";
 import { UserRepository } from "../../database/repositories/user.repository";
 
 export const createUser = async (req: Request, res: Response<UserOutputDTO | { message: string }>) => {
   const { name, email, password } = req.body as UserCreateInputDTO;
+
+  if (!name) {
+    res.status(400).json({ message: "Name is required" });
+    return;
+  }
+
+  if (!password) {
+    res.status(400).json({ message: "Password is required" });
+    return;
+  }
+
+  if (!email) {
+    res.status(400).json({ message: "Email is required" });
+    return;
+  }
 
   if (typeof name !== "string") {
     res.status(400).json({ message: "Name must be a string" });
@@ -34,10 +50,12 @@ export const createUser = async (req: Request, res: Response<UserOutputDTO | { m
   }
 
   try {
+    const hashedPassword = bcrypt.hashSync(password, 10);
+
     const createdUser = new User({
       name,
       email,
-      password,
+      password: hashedPassword,
     });
 
     const persistedUser = await userRepository.create(createdUser);

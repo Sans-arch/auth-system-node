@@ -7,3 +7,4 @@ temp/
 .devdbrc
 database.sqlite
 coverage/
+.env
