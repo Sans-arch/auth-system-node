@@ -5,16 +5,35 @@ import { UserRepository } from "../../database/repositories/user.repository";
 
 export const createUser = async (req: Request, res: Response<UserOutputDTO | { message: string }>) => {
   const { name, email, password } = req.body as UserCreateInputDTO;
+
+  if (typeof name !== "string") {
+    res.status(400).json({ message: "Name must be a string" });
+    return;
+  }
+
+  if (typeof password !== "string") {
+    res.status(400).json({ message: "Password must be a string" });
+    return;
+  }
+
+  if (password.length < 6) {
+    res.status(400).json({ message: "Password must be at least 6 characters long" });
+    return;
+  }
+
+  if (typeof email !== "string") {
+    res.status(400).json({ message: "Email must be a string" });
+    return;
+  }
+
   const userRepository = new UserRepository();
+  const userAlreadyExists = await userRepository.existsByEmail(email);
+  if (userAlreadyExists) {
+    res.status(400).json({ message: "Email address already in use, try another one" });
+    return;
+  }
 
   try {
-    const userAlreadyExists = await userRepository.existsByEmail(email);
-
-    if (userAlreadyExists) {
-      res.status(400).json({ message: "Email address already in use, try another one" });
-      return;
-    }
-
     const createdUser = new User({
       name,
       email,
