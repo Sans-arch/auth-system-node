@@ -10,6 +10,7 @@
 - [x] - Rodar cobertura de código (coverage)
 - [ ] - Utilizar Docker (adicionar Dockerfile)
 - [x] - Adicionar um Logger
+- [x] - Adicionar EJS para server-side rendering
 
 Conceitos utilizados no projeto:
 
@@ -20,3 +21,4 @@ Conceitos utilizados no projeto:
 - Criação de testes unitários com Jest
 - Utilização de code coverage com o Jest
 - Utilização de Logger (pino)
+- Utilização de EJS para Server Side Rendering (código HTML processado e provido pelo servidor)
