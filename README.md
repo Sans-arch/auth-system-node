@@ -8,7 +8,8 @@
 - [ ] - Utilizar migrations
 - [x] - Criar testes unitários com Jest
 - [x] - Rodar cobertura de código (coverage)
-- [x] - Utilizar Docker (adicionar Dockerfile)
+- [ ] - Utilizar Docker (adicionar Dockerfile)
+- [x] - Adicionar um Logger
 
 Conceitos utilizados no projeto:
 
@@ -18,3 +19,4 @@ Conceitos utilizados no projeto:
 - Utilização de ORM (usando TypeORM)
 - Criação de testes unitários com Jest
 - Utilização de code coverage com o Jest
+- Utilização de Logger (pino)

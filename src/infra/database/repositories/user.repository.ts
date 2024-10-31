@@ -47,8 +47,33 @@ export class UserRepository implements UserRepositoryInterface {
     });
   }
 
+  async findByEmail(email: string): Promise<User> {
+    const userModelRepository = ApplicationDatabaseSource.getRepository(UserModel);
+
+    const userModel = await userModelRepository.findOneBy({
+      email: email,
+    });
+
+    if (!userModel) {
+      return null;
+    }
+
+    return new User({
+      id: userModel.id,
+      email: userModel.email,
+      name: userModel.name,
+      password: userModel.password,
+      created_at: userModel.created_at,
+      updated_at: userModel.updated_at,
+    });
+  }
+
   async existsByEmail(email: string): Promise<boolean> {
     const userModelRepository = ApplicationDatabaseSource.getRepository(UserModel);
+
+    if (email === undefined) {
+      return false;
+    }
 
     return await userModelRepository.existsBy({
       email: email,

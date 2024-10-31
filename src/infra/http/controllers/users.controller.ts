@@ -50,7 +50,7 @@ export const createUser = async (req: Request, res: Response<UserOutputDTO | { m
   }
 
   try {
-    const hashedPassword = bcrypt.hashSync(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const createdUser = new User({
       name,

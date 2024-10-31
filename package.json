@@ -7,7 +7,6 @@
       "dev": "nodemon src/infra/http/server.ts",
       "test": "jest",
       "coverage": "jest --coverage",
-      "test-db": "ts-node src/infra/database/test-db.ts",
       "typeorm": "typeorm-ts-node-commonjs"
    },
    "author": "Sans-arch",
@@ -17,6 +16,8 @@
       "bcrypt": "^5.1.1",
       "dotenv": "^16.4.5",
       "express": "4.21.1",
+      "pino": "^9.5.0",
+      "pino-pretty": "^11.3.0",
       "reflect-metadata": "^0.1.13",
       "sqlite3": "^5.0.2",
       "typeorm": "0.3.20",

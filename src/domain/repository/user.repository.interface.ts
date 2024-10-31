@@ -3,4 +3,5 @@ import { RepositoryInterface } from "./repository.interface";
 
 export interface UserRepositoryInterface extends RepositoryInterface<User> {
   existsByEmail: (email: string) => Promise<boolean>;
+  findByEmail: (email: string) => Promise<User>;
 }

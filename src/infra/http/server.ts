@@ -1,7 +1,9 @@
 import "dotenv/config";
 import express from "express";
-import usersRouter from "./routes/users";
+import usersRouter from "./routes/user.route";
+import authRouter from "./routes/auth.route";
 import { ApplicationDatabaseSource } from "../database/data-source";
+import { logger } from "../../config/logger";
 
 ApplicationDatabaseSource.initialize()
   .then(() => {
@@ -12,9 +14,10 @@ ApplicationDatabaseSource.initialize()
 
     server.use(express.json());
     server.use("/users", usersRouter);
+    server.use("/auth", authRouter);
 
     server.listen(port, () => {
-      console.log(`Server running on port ${port}`);
+      logger.info(`Server running on port ${port}`);
     });
   })
   .catch((e) => {
