@@ -11,7 +11,7 @@
 - [ ] - Utilizar Docker (adicionar Dockerfile)
 - [x] - Adicionar um Logger
 - [x] - Adicionar EJS para server-side rendering
-- [ ] - Adicionar autenticação JWT
+- [x] - Adicionar autenticação JWT
 - [ ] - Usar Redis
 - [x] - Usar cookies para armazenar o token
 
