@@ -12,6 +12,8 @@
 - [x] - Adicionar um Logger
 - [x] - Adicionar EJS para server-side rendering
 - [ ] - Adicionar autenticação JWT
+- [ ] - Usar Redis
+- [x] - Usar cookies para armazenar o token
 
 Conceitos utilizados no projeto:
 
@@ -24,3 +26,4 @@ Conceitos utilizados no projeto:
 - Utilização de Logger (pino)
 - Utilização de EJS para Server Side Rendering (código HTML processado e provido pelo servidor)
 - Utilização de autenticação JWT
+- Utilização de cookies

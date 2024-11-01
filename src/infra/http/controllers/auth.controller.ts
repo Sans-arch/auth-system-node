@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { UserRepository } from "../../database/repositories/user.repository";
 import { UserLoginInputDTO } from "../dtos/auth.dto.interface";
 
@@ -27,7 +28,25 @@ export const login = async (req: Request, res: Response) => {
     return;
   }
 
-  res.status(200).json({ message: "User logged in successfully!" });
+  const tokenPayload = {
+    id: user.id,
+    username: user.email,
+  };
+  const token = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY, {
+    expiresIn: "1h",
+  });
+
+  res
+    .status(200)
+    .cookie("access_token", token, {
+      httpOnly: true, // cookie cannot be accessed by client-side scripts, only by the server-side
+      secure: process.env.NODE_ENV === "production", // cookie will only be sent over HTTPS
+      sameSite: "strict", // cookie will only be sent to the same domain
+      maxAge: 1000 * 60 * 60, // 1 hour, cookie will expire after 1 hour
+    })
+    .json({ token });
 };
 
-export const register = async (req: Request, res: Response) => {};
+export const logout = async (req: Request, res: Response) => {
+  res.status(200).clearCookie("access_token").json({ message: "Logged out successfully!" });
+};

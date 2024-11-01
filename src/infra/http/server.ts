@@ -1,5 +1,7 @@
 import "dotenv/config";
 import express from "express";
+import cookieParser from "cookie-parser";
+import jwt from "jsonwebtoken";
 import path from "node:path";
 import usersRouter from "./routes/user.route";
 import authRouter from "./routes/auth.route";
@@ -15,13 +17,33 @@ ApplicationDatabaseSource.initialize()
     server.set("view engine", "ejs");
     server.set("views", path.join(__dirname, "/views"));
     server.use(express.json());
+    server.use(cookieParser());
+
+    server.use((req, res, next) => {
+      const token = req.cookies["access_token"];
+      req["session"] = { user: null };
+
+      try {
+        const data = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        req["session"].user = data;
+      } catch {}
+
+      next();
+    });
 
     server.get("/", (req, res) => {
-      res.render("index");
+      const { user } = req["session"];
+      res.render("index", user);
     });
 
     server.get("/protected", (req, res) => {
-      res.render("protected");
+      const { user } = req["session"];
+      if (!user) {
+        res.status(403).send("Unauthorized");
+        return;
+      }
+
+      res.render("protected", user);
     });
 
     server.use("/users", usersRouter);

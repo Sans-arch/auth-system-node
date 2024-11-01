@@ -139,7 +139,7 @@
 
       logoutButton?.addEventListener("click", (e) => {
         e.preventDefault();
-        fetch("/logout", {
+        fetch("/auth/logout", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
