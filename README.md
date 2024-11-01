@@ -5,14 +5,11 @@
 - [x] - Permitir atualização de um usuário
 - [x] - Permitir a deleção de um usuário
 - [x] - Utilizar um ORM -> TypeORM
-- [ ] - Utilizar migrations
 - [x] - Criar testes unitários com Jest
 - [x] - Rodar cobertura de código (coverage)
-- [ ] - Utilizar Docker (adicionar Dockerfile)
 - [x] - Adicionar um Logger
 - [x] - Adicionar EJS para server-side rendering
 - [x] - Adicionar autenticação JWT
-- [ ] - Usar Redis
 - [x] - Usar cookies para armazenar o token
 
 Conceitos utilizados no projeto:
